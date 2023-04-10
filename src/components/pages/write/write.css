@@ -1,0 +1,126 @@
+.write {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.writeWrapper {
+  width: 50%;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+
+
+.writeFormGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.writeFormGroup label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: #333333;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.writeFormGroup label:hover {
+  background-color: #555555;
+  transform: translateX(1rem);
+}
+
+.writeIcon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.writeFormGroup:hover .writeIcon {
+  transform: translateX(0.5rem);
+}
+
+.writeFormGroup:hover label {
+  background-color: #555555;
+}
+
+.writeInput {
+  flex: 1;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  margin-left: 1rem;
+  background-color: #f0f0f0;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.writeInput:focus {
+  background-color: #e0e0e0;
+}
+
+.writeText {
+  height: 20rem;
+  resize: none;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  margin-bottom: 1.5rem;
+  background-color: #f0f0f0;
+}
+
+.writeText:focus {
+  background-color: #e0e0e0;
+}
+
+.writeSubmit {
+  align-self: flex-end;
+  border: none;
+  outline: none;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.2rem;
+  border-radius: 1rem;
+  background-color: #555555;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.writeSubmit:hover {
+  background-color: #333333;
+}
+
+
+
+.writeFormGroup label:hover::after {
+    content: "Upload";
+    display: inline-block;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .writeFormGroup label:hover {
+    background-color: #555555;
+    /* transform: translateX(1rem); */
+    border-radius: 5px;
+    width: 100px;
+  }
+  
+

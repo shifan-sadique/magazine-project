@@ -1,0 +1,75 @@
+.login{
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    background: whitesmoke;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* add box shadow */
+    overflow: hidden;
+    
+}
+.login {
+    background-color: white;
+    background-image: radial-gradient(lightgrey 2px, transparent 2px),
+      radial-gradient(lightgrey 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.8;
+  }
+  
+  
+
+.loginForm{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(229, 229, 229);
+    padding: 30px; /* add padding */
+    border-radius: 10px; /* add border radius */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* add box shadow */
+}
+
+
+.loginTitle{
+    font-size: 50px;
+    display:flex;
+    justify-content: center;
+}
+
+.loginForm{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm>label{
+    margin: 10px 0;
+}
+
+.loginInput{
+    padding: 10px;
+    background-color: white;
+    border: none;
+    
+}
+
+.loginButton{
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #D1E9F9;
+    border: none;
+    color:navy;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.loginRegisterButton{
+    margin-top: 2;
+    cursor: pointer;
+    background-color:#D1E9F9;
+    border: none;
+    color:navy;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;}
