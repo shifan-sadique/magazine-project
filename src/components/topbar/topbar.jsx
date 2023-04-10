@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FaUser, FaUserCircle } from 'react-icons/fa';
+import logo from "../../asca new.png"
+
 
 const Navigation = () => {
   const [user, setUser] = useState(false);
@@ -40,7 +42,7 @@ const Navigation = () => {
         transition: 'background-color 0.5s ease-in-out',
       }}
     >
-      <Navbar.Brand href="/">ASCA</Navbar.Brand>
+      <Navbar.Brand href="/"><img className='logo' src={logo} alt="" /></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
