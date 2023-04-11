@@ -1,5 +1,6 @@
 import "./dashsidebar.scss"
-import logo from "../../../../asca new.png"
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import logo from "../../../../assets/asca copy.png"
 
 function Dashsidebar() {
   return (
@@ -12,9 +13,10 @@ function Dashsidebar() {
             <ul>
                 <li>
                     <span>
+                    <DashboardIcon/>
                         Dashboard
                     </span>
-                </li>
+                </li >
                 <li>
                     <span>
                         Dashboard
