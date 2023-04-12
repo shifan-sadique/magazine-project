@@ -3,5 +3,34 @@
     .homeContainer{
         // background-color: lightblue;
         flex : 6;
+
+
+        .widgets, .charts
+        {   
+            display: flex;
+            padding: 20px;
+            gap:20px;
+        
+        }
+
+        .charts{
+            padding: 5px 20px; 
+        }
+
+        .listContainer{
+            -webkit-box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
+-moz-box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
+box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+
+    .listTitle{
+        font-weight: 500;
+        color:gray;
+        margin-bottom: 15px;
+    }
+
+        }
     }
 }
