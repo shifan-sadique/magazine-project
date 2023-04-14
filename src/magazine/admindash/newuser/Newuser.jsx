@@ -1,7 +1,14 @@
+import Nav from "../dashcomponent/Nav/Nav"
+import Sidebar from "../dashcomponent/dashSidebar/Dashsidebar"
+
 import './newuser.scss'
 function Newuser() {
   return (
-    <div>Newuser</div>
+    <div>
+      <Nav/>
+      <Sidebar/>
+      Navbar
+    </div>
   )
 }
 

@@ -1,42 +1,42 @@
 export const userColumns = [
-    { field: 'id', headerName: 'ID', width: 150 },
-    {
-      field: 'name',
-      headerName: 'Name',
-      width: 200,
+  { field: 'id', headerName: 'ID', width: 100 },
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 200,
+    editable: true,
+  },
+
+      {
+    field: 'batch',
+    headerName: 'Batch',
+    width: 150,
+
+  },
+  {
+      field: 'rno',
+      headerName: 'Roll Number',
+      width: 190,
+
+    },
+  {
+      field: 'specialization',
+      headerName: 'Specialization',
+      width: 190,
       editable: true,
     },
-
-        {
-      field: 'batch',
-      headerName: 'Batch',
-      width: 150,
+    {
+      field: 'status',
+      headerName: 'Status',
+      width: 160,
+      renderCell:(params) => {
+          return <div className={`cellWithStatus ${params.row.status}`}>{params.row.status}</div>;
+          
+      },
 
     },
-    {
-        field: 'rno',
-        headerName: 'Roll Number',
-        width: 190,
 
-      },
-    {
-        field: 'specialization',
-        headerName: 'Specialization',
-        width: 190,
-        editable: true,
-      },
-      {
-        field: 'status',
-        headerName: 'Status',
-        width: 160,
-        renderCell:(params) => {
-            return <div className={`cellWithStatus ${params.row.status}`}>{params.row.status}</div>;
-            
-        },
-
-      },
-
-  ];
+];
 
 
 export const userRows = [
