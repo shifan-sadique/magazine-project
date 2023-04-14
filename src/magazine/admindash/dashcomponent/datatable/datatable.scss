@@ -1,0 +1,70 @@
+
+.title{
+    font-family: 'Montserrat', sans-serif;
+    margin: 5px 8px;
+    font-weight: 600;
+    color: #7451f8;
+}
+
+
+.tabletitle{
+    font-family: 'Montserrat', sans-serif;
+    margin: 5px 8px;
+    color: #7451f8;
+
+}
+
+
+.datatable{
+    height: 600px;
+    padding: 5px;
+        
+    .cellWithStatus{
+        padding: 5px;
+        border-radius: 5px;
+
+        &.Active{
+            background-color: rgba(0,128,0,0.05);
+            color: green;
+        }
+
+        
+        &.Pending{
+            background-color: rgba(255,217,0,0.05);
+            color: goldenrod;
+        }
+        
+        &.Passive{
+            background-color: rgba(255,0,0,0.05);
+            color: crimson;
+        }
+
+    }
+    .cellAction {
+        display: flex;
+        align-items: center;
+        // flex-direction: column;
+        gap: 15px;
+      }
+      .viewButton{
+        justify-content: center;
+        padding: 2px 5px;
+        height: 30px;
+        color:darkblue;
+        border:1px dotted rgba(0,0,139,0.5);
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .deleteButton{
+        align-items: center;
+        padding: 2px 5px;
+        height: 30px;
+        color: crimson;
+        border: 1px dotted rgba(220,20,60,0.5);
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .tableContent{
+        font-family: 'Roboto', sans-serif;
+      }
+}
