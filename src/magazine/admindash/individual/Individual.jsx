@@ -2,7 +2,7 @@ import Sidebar from "../dashcomponent/dashSidebar/Dashsidebar"
 import Nav from "../dashcomponent/Nav/Nav"
 import "./Individual.scss"
 import Featured from "../dashcomponent/featured/Featured"
-
+import List from "../dashcomponent/table/Table"
 
 function Individual() {
   return (
@@ -44,10 +44,13 @@ function Individual() {
             </div>
           </div>
           <div className="right">
-              <Featured/>
+              <Featured />
           </div>
         </div>
-        <div className="bottom"></div>
+        <div className="userBottom">
+        <h1 className="title">Work List</h1>
+          <List/>
+        </div>
       </div>
       </div>
   )

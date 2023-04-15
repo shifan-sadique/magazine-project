@@ -83,11 +83,22 @@ box-shadow: -8px 10px 15px -5px #7451f8;
 
     }
 
+    .userBottom{
+        padding: 30px;
+        -webkit-box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
+-moz-box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
+box-shadow: -8px 10px 15px -5px #7451f8;
+    border-radius: 10px;
+    margin:20px;
+
+    }    
 
     .title{
         font-size: 16px;
         font-weight: 100;
         color:rgba(128, 128, 128, 0.577);
         margin-bottom: -5px;
+        
     }
 }
+
