@@ -49,6 +49,6 @@ export const userRows = [
     { id: 7, name: 'hareesh', batch:"21-23", rno:18,specialization: 'Literature',status:"Active" },
     { id: 8, name: 'sachin', batch:"22-24", rno:27,specialization: 'Art',status:"Passive" },
     { id: 9, name: 'ashhad', batch:"20-22", rno:44,specialization: 'Design',status:"Pending" },
-    { id: 10, name: 'abhinand', batch:"20-23", rno:5,specialization: 'Proof Read',status:"Active" },    
+    { id: 10, name:'abhinand', batch:"20-23", rno:5,specialization: 'Proof Read',status:"Active" },    
   ];
   
