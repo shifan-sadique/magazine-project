@@ -38,6 +38,7 @@
             align-items: center;
             padding: 5px;
             cursor: pointer;
+            text-decoration: none;
 
             &:hover{
                  background-color: #ece8ff;
@@ -86,4 +87,6 @@
     
 }
 
-
+a {
+    text-decoration: none;
+}

@@ -24,7 +24,7 @@
     .cellWithStatus{
         padding: 10px;
         border-radius: 10px;
-        height:75%;
+        
 
         &.Active{
             background-color: rgba(0,128,0,0.05);
@@ -74,3 +74,6 @@
       
 }
 
+.MuiDataGrid-searchContainer {
+  height: 100px;
+}
