@@ -19,8 +19,9 @@ import Advertisement from "./magazine/admindash/dashcomponent/advertisement/adHo
 
 
 // magazine committee imports
-// import CommitteeMemberDashHome from './magazine/committeedash/commdashcomponent/commDashHome/CommDashHome.jsx'
-
+import CommitteeHome from './magazine/committeedash/committeecomponents/committeeHome/CommitteeHome.jsx'
+import CommitteeAssignment from './magazine/committeedash/committeecomponents/committeeAssignment/CommitteeAssignmentHome/CommitteeAssignmentHome.jsx'
+import CommitteeReview from './magazine/committeedash/committeecomponents/committeeReview/CommitteeReview.jsx'
 
 
 import {
@@ -92,10 +93,17 @@ function App() {
 
           {/* Magazine Committe Section  */}
 
-          {/* Committee Dashboard  */}
-          {/* <Route path="/memeber/dashboard" element={user? <Dashboard/>: <Home/>}></Route> */}
+            {/* Committee Dashboard  */}
+            <Route path="/committee/dashboard" element={user? <CommitteeHome/>: <Home/>}></Route>
+
+            {/* Committee Assignment */}
+            <Route path="/committee/assignment" element={user? <CommitteeAssignment/>: <Home/>}></Route>
+
+            {/* Committee Review */}
+            <Route path="/committee/review" element={user? <CommitteeReview/>: <Home/>}></Route>
 
 
+          
       </Routes>
     </div>
     </Router>

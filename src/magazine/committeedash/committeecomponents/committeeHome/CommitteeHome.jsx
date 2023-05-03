@@ -1,15 +1,15 @@
-import Sidebar from "../dashcomponent/dashSidebar/Dashsidebar"
-import Nav from "../dashcomponent/Nav/Nav"
-import "./Individual.scss"
-import Featured from "../dashcomponent/featured/Featured"
-import List from "../dashcomponent/table/Table"
+import CommitteeSidebar from '../CommitteeSidebar/CommitteeSidebar'
+import CommitteeNav from '../committeeNav/CommitteeNav'
+import "./committeeHome.scss"
+import CommitteeFeatured from '../committeeFeatured/CommitteeFeatured'
+import CommitteeTable from '../CommitteeTable/CommitteeTable'
 
 function CommitteeHome() {
   return (
     <div className="commhome">
-      <Sidebar/>
+      <CommitteeSidebar/>
       <div className="commhomeContainer">
-      <Nav/>
+      <CommitteeNav/>
         <div className="top">
           <div className="left">
             <div className="editButton">
@@ -44,12 +44,12 @@ function CommitteeHome() {
             </div>
           </div>
           <div className="right">
-              <Featured />
+              <CommitteeFeatured />
           </div>
         </div>
         <div className="userBottom">
         <h1 className="title">Work List</h1>
-          <List/>
+          <CommitteeTable/>
         </div>
       </div>
       </div>
