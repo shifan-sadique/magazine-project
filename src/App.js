@@ -4,12 +4,13 @@ import Single from "./components/pages/single/single"
 import Write from "./components/pages/write/Write.jsx";
 import Settings from "./components/pages/settings/Settings.jsx";
 import Login from "./components/pages/login/Login.jsx";
+import RegisterDetails from './components/registerDetails/RegisterDetails.jsx'
 import Magazine from "./magazine/pages/home/MagazineHome.jsx"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from "./magazine/admindash/dashhome/Dashhome.jsx"
 import List from "./magazine/admindash/list/List.jsx";
 import Individual from "./magazine/admindash/individual/Individual.jsx";
-import NewUser from "./magazine/admindash/newuser/Newuser.jsx"
+import EditUser from "./magazine/admindash/newuser/Newuser.jsx"
 import NewBatch from "./magazine/admindash/dashcomponent/newBatch/NewBatch.jsx";
 import Assignment from "./magazine/admindash/dashcomponent/assignment/assignmentHome/AssignmentHome.jsx"
 import Review from "./magazine/admindash/dashcomponent/review/Review.jsx"
@@ -17,12 +18,12 @@ import Article from "./magazine/admindash/dashcomponent/article/articlehome/Arti
 import Advertisement from "./magazine/admindash/dashcomponent/advertisement/adHome/AdHome.jsx"
 
 
-
 // magazine committee imports
 import CommitteeHome from './magazine/committeedash/committeecomponents/committeeHome/CommitteeHome.jsx'
 import CommitteeAssignment from './magazine/committeedash/committeecomponents/committeeAssignment/CommitteeAssignmentHome/CommitteeAssignmentHome.jsx'
 import CommitteeReview from './magazine/committeedash/committeecomponents/committeeReview/CommitteeReview.jsx'
-
+import CommitteeArticlesHome from './magazine/committeedash/committeecomponents/committeeArticles/committeeArticlesHome/CommitteeArticlesHome.jsx'
+import CommitteeAdHome from './magazine/committeedash/committeecomponents/committeeAdvertisement/committeeAdvertisementHome/CommitteeAdvertisementHome.jsx'
 
 import {
   BrowserRouter as Router,
@@ -50,7 +51,9 @@ function App() {
         <Route path="/write" element={<Write/>}> </Route>
         <Route path="/settings" element={user? <Settings/> : <Home/>}> </Route>
         <Route path="/login" element={user? <Home/> : <Login/>}> </Route>
+        <Route path="/registerdetails" element={user? <Home/> : <RegisterDetails/>}> </Route>
         <Route path="/register" element={user? <Home/> : <Register/>}> </Route>
+
         <Route path="/dashboard" element={user?<Home/> :  <Dashboard/>}></Route>
 
         {/* Admin Dashboard */}
@@ -62,7 +65,7 @@ function App() {
 
           {/* Magazine Committee Section */}
           <Route path="/admin/magazinecommittee" element={user ? <List /> : <Navigate to="/login" />} />
-          <Route path="/admin/magazinecommittee/new" element={user ? <NewUser /> : <Navigate to="/login" />} />
+          <Route path="/admin/magazinecommittee/edit" element={user ? <EditUser /> : <Navigate to="/login" />} />
           <Route path="/admin/magazinecommittee/:id" element={user ? <Individual /> : <Navigate to="/login" />} />
           {/* Magazine Committee ends here */}
 
@@ -101,6 +104,14 @@ function App() {
 
             {/* Committee Review */}
             <Route path="/committee/review" element={user? <CommitteeReview/>: <Home/>}></Route>
+
+            {/* committee articles */}
+            <Route path="/committee/articles" element={user? <CommitteeArticlesHome/>: <Home/>}></Route>
+
+            {/* committee Advertisement */}
+            <Route path="/committee/advertisement" element={user? <CommitteeAdHome/>: <Home/>}></Route>
+
+
 
 
           

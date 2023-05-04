@@ -3,6 +3,9 @@ import Nav from "../dashcomponent/Nav/Nav"
 import "./Individual.scss"
 import Featured from "../dashcomponent/featured/Featured"
 import List from "../dashcomponent/table/Table"
+import { Button } from "@material-ui/core"
+import { Link } from 'react-router-dom';
+
 
 function Individual() {
   return (
@@ -12,9 +15,15 @@ function Individual() {
       <Nav/>
         <div className="top">
           <div className="left">
+
             <div className="editButton">
+            <Button>
+              <Link to="/admin/magazinecommittee/edit">
               edit
+              </Link>
+            </Button>
             </div>
+
             <h1 className="title">User Information</h1>
             <div className="item">
               <div className="details">

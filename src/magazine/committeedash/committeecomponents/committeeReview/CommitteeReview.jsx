@@ -68,7 +68,7 @@ const handleSearchTextChange = (e) => {
                 <CommitteeNav />
                 <div className="tableContainer">
                     <div className="table" style={{ height: 400, width: '100%' }}>
-                        <h2 style={{ color: "lightgray" }}>Content Review</h2>
+                        <h1 className='title' style={{ color: "lightgray" }}>Content Review</h1>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: 5 }}>
                             <input type="text" value={searchText} onChange={handleSearchTextChange} placeholder='Search' />
                         </div>

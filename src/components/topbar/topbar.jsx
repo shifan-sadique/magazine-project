@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FaUser, FaUserCircle } from 'react-icons/fa';
 import logo from "../../asca new.png"
+import './topbar.css'
 
 
 const Navigation = () => {

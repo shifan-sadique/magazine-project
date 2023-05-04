@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import "./register.css"
+import { Link } from 'react-router-dom';
 
 export default function Register(props) {
   const [name, setName] = useState("");
@@ -50,7 +51,7 @@ export default function Register(props) {
   return (
     <div className="register">
       <form className="registerForm" onSubmit={handleSubmit}>
-      <span className="registerTitle">REGISTER</span>
+      <span className="registerTitle">COMMITTEE REGISTERATION</span>
         <label htmlFor="name">Name</label>
         <input className='registerInput' type="text" placeholder="Name" id="name" value={name} onChange={(event) => setName(event.target.value)} />
         <label htmlFor="phoneNumber">Phone Number</label>
@@ -67,7 +68,9 @@ export default function Register(props) {
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input type="password" placeholder="Confirm Password" id="confirmPassword" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
         {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
+        <Link to="/registerdetails">
         <button type="submit" className="registerButton">Register</button>
+        </Link>
       </form>
     </div>
   );

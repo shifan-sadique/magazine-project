@@ -16,6 +16,7 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Login from "../../../../components/pages/login/Login";
 
 function Committeesidebar() {
   return (
@@ -28,7 +29,7 @@ function Committeesidebar() {
             <ul>
                 <p className="title">MAIN</p>
                 <li>
-                    <Link to="/admin/dashboard">
+                    <Link to="/committee/dashboard">
                     <span>
                     <DashboardIcon className="icons"/>
                         Dashboard
@@ -39,7 +40,7 @@ function Committeesidebar() {
                 <p className="title">USEFUL</p>
 
                 <li>
-                <Link to="/admin/assignment">
+                <Link to="/committee/assignment">
 
                     <span>
                         <AssignmentIcon className="icons"/>
@@ -49,7 +50,7 @@ function Committeesidebar() {
 
                 </li>
                 <li>
-                <Link to="/admin/review">
+                <Link to="/committee/review">
 
                     <span>
                         <PreviewIcon className="icons"/>
@@ -59,7 +60,7 @@ function Committeesidebar() {
 
                 </li>
                 <li>
-                <Link to="/admin/articles">
+                <Link to="/committee/articles">
 
                     <span>
                         <NewspaperIcon className="icons"/>
@@ -68,7 +69,7 @@ function Committeesidebar() {
                     </Link>
                 </li>
                 <li>
-                <Link to="/admin/magazineissue">
+                <Link to="/committee/magazineissue">
 
                     <span>
                         <ImportContactsIcon className="icons"/>
@@ -78,7 +79,7 @@ function Committeesidebar() {
 
                 </li>
                 <li>
-                <Link to="/admin/advertisement">
+                <Link to="/committee/advertisement">
 
                     <span>
                         <AttachMoneyIcon className="icons"/>
@@ -91,7 +92,7 @@ function Committeesidebar() {
 
                 <p className="title">USER</p>
                 <li>
-                <Link to="/admin/dashboard">
+                <Link to="/login">
 
                     <span>
                         <ExitToAppIcon className="icons"/>

@@ -16,6 +16,7 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Login from "../../../../components/pages/login/Login";
 
 function Dashsidebar() {
   return (
@@ -151,7 +152,7 @@ function Dashsidebar() {
 
                 </li>
                 <li>
-                <Link to="/admin/dashboard">
+                <Link to="/login">
 
                     <span>
                         <ExitToAppIcon className="icons"/>

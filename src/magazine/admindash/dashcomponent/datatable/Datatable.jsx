@@ -4,6 +4,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import { userColumns, userRows } from '../../../../datatablesource';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import AddIcon from '@mui/icons-material/Add';
 
 const Datatable = () => {
 
@@ -83,6 +84,7 @@ const Datatable = () => {
           <h3>Committee List</h3>
         </div>
 
+        <div className="search-container">
         <div className="search">
           <TextField
             id="outlined-basic"
@@ -92,6 +94,7 @@ const Datatable = () => {
             onChange={handleSearch}
           />
         </div>
+      </div>
 
         <DataGrid
           className="tableContent"

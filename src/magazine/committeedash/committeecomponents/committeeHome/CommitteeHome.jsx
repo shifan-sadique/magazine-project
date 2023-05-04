@@ -3,6 +3,9 @@ import CommitteeNav from '../committeeNav/CommitteeNav'
 import "./committeeHome.scss"
 import CommitteeFeatured from '../committeeFeatured/CommitteeFeatured'
 import CommitteeTable from '../CommitteeTable/CommitteeTable'
+import { Button } from "@material-ui/core"
+import { Link } from 'react-router-dom';
+
 
 function CommitteeHome() {
   return (
@@ -13,7 +16,11 @@ function CommitteeHome() {
         <div className="top">
           <div className="left">
             <div className="editButton">
+            <Button>
+              <Link to="/admin/magazinecommittee/edit">
               edit
+              </Link>
+            </Button>
             </div>
             <h1 className="title">User Information</h1>
             <div className="item">

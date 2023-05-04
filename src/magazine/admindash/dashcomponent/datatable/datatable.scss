@@ -71,6 +71,29 @@
         font-family: 'Roboto', sans-serif;
       }
 
+      .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .search {
+        flex: 1;
+        margin-right: 10px;
+      }
+      
+      .addbutton {
+        flex-shrink: 0;
+        margin-right: 5px;
+      }
+      
+      .addbutton button {
+        background-color: lightgray;
+        color: white;
+      
+      }
+      
+
       
 }
 
