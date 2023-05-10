@@ -36,7 +36,12 @@ import Register from "./components/register/Register.jsx";
 
 
 function App() {
-  const user= true;
+  const user= false;
+
+  const ReqireAuth= ({children}) => {
+    return user ? (children) : <Navigate to="/login"/>;
+  };
+
   return (
    <Router> 
     <div className="App">
@@ -50,11 +55,13 @@ function App() {
         <Route path="/post/:postId" element={<Single/>}> </Route>
         <Route path="/write" element={<Write/>}> </Route>
         <Route path="/settings" element={user? <Settings/> : <Home/>}> </Route>
-        <Route path="/login" element={user? <Home/> : <Login/>}> </Route>
         <Route path="/registerdetails" element={user? <Home/> : <RegisterDetails/>}> </Route>
         <Route path="/register" element={user? <Home/> : <Register/>}> </Route>
 
-        <Route path="/dashboard" element={user?<Home/> :  <Dashboard/>}></Route>
+        {/* Login */}
+        <Route path="/login" element={<Login/>}> </Route>
+
+        <Route index path="/dashboard" element={user?<Home/> :  <Dashboard/>}></Route>
 
         {/* Admin Dashboard */}
         <Route path="/admin/dashboard" element={user? <Dashboard/> : <Login/> }></Route>
@@ -112,9 +119,6 @@ function App() {
             <Route path="/committee/advertisement" element={user? <CommitteeAdHome/>: <Home/>}></Route>
 
 
-
-
-          
       </Routes>
     </div>
     </Router>
