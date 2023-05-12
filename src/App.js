@@ -33,15 +33,20 @@ import {
   Navigate
 } from "react-router-dom";
 import Register from "./components/register/Register.jsx";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext.js";
 
 
 function App() {
-  const user= false;
+  
+  const {currentUser} =useContext(AuthContext);
 
-  const ReqireAuth= ({children}) => {
-    return user ? (children) : <Navigate to="/login"/>;
+  const RequireAuth= ({children}) => {
+    return currentUser ? (children) : <Navigate to="/login"/>;
   };
 
+
+    console.log(currentUser)
   return (
    <Router> 
     <div className="App">
@@ -54,69 +59,60 @@ function App() {
         <Route path="/magazine" element={<Magazine/>}> </Route>
         <Route path="/post/:postId" element={<Single/>}> </Route>
         <Route path="/write" element={<Write/>}> </Route>
-        <Route path="/settings" element={user? <Settings/> : <Home/>}> </Route>
-        <Route path="/registerdetails" element={user? <Home/> : <RegisterDetails/>}> </Route>
-        <Route path="/register" element={user? <Home/> : <Register/>}> </Route>
+        <Route path="/settings" element={currentUser? <Settings/> : <Home/>}> </Route>
+        <Route path="/registerdetails" element={currentUser? <Home/> : <RegisterDetails/>}> </Route>
+        <Route path="/register" element={currentUser? <Home/> : <Register/>}> </Route>
 
         {/* Login */}
         <Route path="/login" element={<Login/>}> </Route>
 
-        <Route index path="/dashboard" element={user?<Home/> :  <Dashboard/>}></Route>
-
-        {/* Admin Dashboard */}
-        <Route path="/admin/dashboard" element={user? <Dashboard/> : <Login/> }></Route>
+        <Route path="/dashboard" element={<RequireAuth><Dashboard/></RequireAuth>} />
+          {/* Admin Dashboard */}
+          <Route path="/admin/dashboard" element={<RequireAuth><Dashboard/></RequireAuth>} />
 
           {/* User page and individual page with ID */}
-          <Route path="/admin/user" element={user ?<NewBatch/> : <Navigate to="/login" />} />
-          {/* user sections ends here */}
+          <Route path="/admin/user" element={<RequireAuth><NewBatch/></RequireAuth>} />
 
           {/* Magazine Committee Section */}
-          <Route path="/admin/magazinecommittee" element={user ? <List /> : <Navigate to="/login" />} />
-          <Route path="/admin/magazinecommittee/edit" element={user ? <EditUser /> : <Navigate to="/login" />} />
-          <Route path="/admin/magazinecommittee/:id" element={user ? <Individual /> : <Navigate to="/login" />} />
-          {/* Magazine Committee ends here */}
+          <Route path="/admin/magazinecommittee" element={<RequireAuth><List/></RequireAuth>} />
+          <Route path="/admin/magazinecommittee/edit" element={<RequireAuth><EditUser/></RequireAuth>} />
+          <Route path="/admin/magazinecommittee/:id" element={<RequireAuth><Individual/></RequireAuth>} />
 
           {/* Assignment Section */}
-          <Route path="/admin/assignment" element={user?<Assignment/>:<Home/>}></Route>
-          {/* assignment section end here */}
+          <Route path="/admin/assignment" element={<RequireAuth><Assignment/></RequireAuth>} />
 
           {/* Review Section */}
-          <Route path="/admin/review" element={user? <Review/>: <Home/>}></Route>
-          {/* review section ends here */}
+          <Route path="/admin/review" element={<RequireAuth><Review/></RequireAuth>} />
 
           {/* Article Section */}
-          <Route path="/admin/articles" element={user?<Article/> :<Home/>}></Route>
-          {/* Article Section end */}
+          <Route path="/admin/articles" element={<RequireAuth><Article/></RequireAuth>} />
 
-          {/* magazine issue not done */}
-          <Route path="/admin/magazineissue" element={user? <Dashboard/>: <Home/>}></Route>
-          {/* magaznine issue end */}
+          {/* Magazine Issue */}
+          <Route path="/admin/magazineissue" element={<RequireAuth><Dashboard/></RequireAuth>} />
 
-          {/* advertisement section */}
-          <Route path="/admin/advertisement" element={user?  <Advertisement/> : <Home/>}></Route>
-          {/* ad section end */}
+          {/* Advertisement Section */}
+          <Route path="/admin/advertisement" element={<RequireAuth><Advertisement/></RequireAuth>} />
 
-          <Route path="/admin/dashboard/notification" element={user?<Dashboard/> : <Home/>}></Route>
-          <Route path="/admin/dashboard/settings" element={user? <Dashboard/> : <Home/>}></Route>
-          <Route path="/admin/profile" element={user?<Dashboard/> : <Home/>}></Route>
-
+          <Route path="/admin/dashboard/notification" element={<RequireAuth><Dashboard/></RequireAuth>} />
+          <Route path="/admin/dashboard/settings" element={<RequireAuth><Dashboard/></RequireAuth>} />
+          <Route path="/admin/profile" element={<RequireAuth><Dashboard/></RequireAuth>} />
 
           {/* Magazine Committe Section  */}
 
             {/* Committee Dashboard  */}
-            <Route path="/committee/dashboard" element={user? <CommitteeHome/>: <Home/>}></Route>
+            <Route path="/committee/dashboard" element={currentUser? <CommitteeHome/>: <Home/>}></Route>
 
             {/* Committee Assignment */}
-            <Route path="/committee/assignment" element={user? <CommitteeAssignment/>: <Home/>}></Route>
+            <Route path="/committee/assignment" element={currentUser? <CommitteeAssignment/>: <Home/>}></Route>
 
             {/* Committee Review */}
-            <Route path="/committee/review" element={user? <CommitteeReview/>: <Home/>}></Route>
+            <Route path="/committee/review" element={currentUser? <CommitteeReview/>: <Home/>}></Route>
 
             {/* committee articles */}
-            <Route path="/committee/articles" element={user? <CommitteeArticlesHome/>: <Home/>}></Route>
+            <Route path="/committee/articles" element={currentUser? <CommitteeArticlesHome/>: <Home/>}></Route>
 
             {/* committee Advertisement */}
-            <Route path="/committee/advertisement" element={user? <CommitteeAdHome/>: <Home/>}></Route>
+            <Route path="/committee/advertisement" element={currentUser? <CommitteeAdHome/>: <Home/>}></Route>
 
 
       </Routes>

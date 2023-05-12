@@ -9,30 +9,45 @@ import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
 
-const AssignmentForm = () => {
-  const [showAfterClick, setShowAfterClick] = useState(false);
+import { addDoc, collection, doc, setDoc } from "firebase/firestore"; 
+import {db} from "../../../../../firebase"
 
-  const handleClick = () => {
-    setShowAfterClick(true);
-  }
 
-  const handleSubmit = () => {
-    setShowAfterClick(false);
+
+const AssignmentForm = ({inputs,title}) => {
+  const [file, setFile] = useState("");
+
+
+  const handleAdd = async(e) => {
+    e.preventDefault();
+
+
+    console.log("handleAdd function called"); // Add this line to log a message
+
+    const data = {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+    };
+
+    try {
+      const res = await addDoc(collection(db, "advertisement"), data);
+      console.log("Document written with ID: ", res.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+    // console.log(res)
+    
   }
 
   return (
     <div className='assignmentForm'>
-      {!showAfterClick && (
-        <div className="beforeclick">
-          <div className="formInput">
-            <AddCircleOutlineRoundedIcon className='plusIcon' onClick={handleClick} />
-            <h2>ADD ASSIGNMENT</h2>
-          </div>
-        </div>
-      )}
-      {showAfterClick && (
+        <form>
+
         <div className="afterClick">
+
           <div className='formInput'>
             <Box
               component="form"
@@ -42,7 +57,7 @@ const AssignmentForm = () => {
               noValidate
               autoComplete="off"
             >
-              <TextField style={{ margin: '20px' }} id="standard-basic" label="Title" variant="standard" />
+              <TextField style={{ margin: '20px' }} id="standard-basic title-input" label="Title" variant="standard" />
               <TextField style={{ margin: '20px' }} id="standard-basic" label="Assigned To" variant="standard" />
               <TextField style={{ margin: '20px' }} id="standard-basic" label="Category" variant="standard" />
             </Box>
@@ -63,10 +78,10 @@ const AssignmentForm = () => {
             </LocalizationProvider>
           </div>
           <div className="formInput">
-            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+            <Button variant="contained"  onClick={handleAdd}>Submit</Button>
           </div>
         </div>
-      )}
+        </form>
     </div>
   )
 }
