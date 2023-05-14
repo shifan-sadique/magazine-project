@@ -60,8 +60,8 @@ function App() {
         <Route path="/post/:postId" element={<Single/>}> </Route>
         <Route path="/write" element={<Write/>}> </Route>
         <Route path="/settings" element={currentUser? <Settings/> : <Home/>}> </Route>
-        <Route path="/registerdetails" element={currentUser? <Home/> : <RegisterDetails/>}> </Route>
-        <Route path="/register" element={currentUser? <Home/> : <Register/>}> </Route>
+        <Route path="/registerdetails" element={ <RegisterDetails/>}> </Route>
+        <Route path="/register" element={<Register/> }> </Route>
 
         {/* Login */}
         <Route path="/login" element={<Login/>}> </Route>

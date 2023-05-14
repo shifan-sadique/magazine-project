@@ -4,6 +4,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"; 
+import {db} from "../../../../../firebase"
+
 const AdForm = () => {
   const [companyName, setCompanyName] = useState('');
   const [contactedBy, setContactedBy] = useState('');
@@ -28,12 +32,29 @@ const AdForm = () => {
     setPhoneError(!phonePattern.test(value));
   }
 
-  const handleSubmit = () => {
-    // Handle form submission here
-  }
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+
+    console.log("handleAdd function called"); // Add this line to log a message
+
+    const data = {
+      name: "tvm",
+      state: "kerala",
+      country: "india",
+      timeStamp: serverTimestamp()
+    };
+
+    try {
+      const res = await addDoc(collection(db, "advertisement"), data);
+      console.log("Document written with ID: ", res.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }  }
 
   return (
     <div className="afterClick">
+      <form onSubmit={handleSubmit}>
       <div className='formInput'>
         <Box
           component="form"
@@ -118,8 +139,9 @@ const AdForm = () => {
             </Box>
             </div>
             <div className="formInput">
-              <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+              <Button variant="contained" type='submit'>Submit</Button>
             </div>
+          </form>
       </div>
 
       )

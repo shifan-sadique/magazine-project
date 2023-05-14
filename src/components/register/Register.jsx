@@ -1,8 +1,14 @@
 import { useState } from 'react';
-import "./register.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { addDoc, collection,setDoc, doc, serverTimestamp, getDoc } from "firebase/firestore"; 
+import { db, auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import "./register.css";
+
 
 export default function Register(props) {
+  const navigate = useNavigate();
+  const [usernameError, setUsernameError] = useState("");
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [username, setUsername] = useState("");
@@ -26,10 +32,6 @@ export default function Register(props) {
       errors.password = "Password must contain both letters and numbers";
     }
 
-    // Validate username
-    if (!/^[a-zA-Z][a-zA-Z0-9]*$/.test(username)) {
-      errors.username = "Username must start with a letter and contain only letters and numbers";
-    }
 
     // Validate confirm password
     if (confirmPassword !== password) {
@@ -40,13 +42,41 @@ export default function Register(props) {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (validateForm()) {
-      // Submit form
-      console.log("Submitting form...");
+      try {
+        // Create user in Firebase Authentication
+        const authUser = await createUserWithEmailAndPassword(auth, email, password);
+
+        console.log(authUser);
+        console.log(authUser.user);
+        console.log(authUser.user.uid);
+
+
+        // Add user details to the database
+        const data = {
+          id: authUser.user.uid, // Use the authenticated user's UID as the document ID
+          name,
+          phoneNumber,
+          email,
+          timestamp: serverTimestamp(),
+        };
+  
+        const userRef = await setDoc(doc(db, "user", authUser.user.uid), data); // Use setDoc instead of addDoc with the specific document ID
+        console.log("Document written with ID: ");
+
+        // Redirect to register details page
+        await navigate(-1); // Navigate to the desired page
+
+        
+      } catch (error) {
+        console.error("Error creating user or adding document: ", error);
+      }
     }
   };
+
 
   return (
     <div className="register">
@@ -57,21 +87,19 @@ export default function Register(props) {
         <label htmlFor="phoneNumber">Phone Number</label>
         <input className='registerInput' type="number" placeholder="Mobile" id="phoneNumber" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
         {errors.phoneNumber && <div className="error">{errors.phoneNumber}</div>}
-        <label htmlFor="username">Username</label>
-        <input className='registerInput' type="text" placeholder="Username" id="username" value={username} onChange={(event) => setUsername(event.target.value)} />
-        {errors.username && <div className="error">{errors.username}</div>}
+      
         <label htmlFor="email">Email</label>
         <input className='registerInput' type="text" placeholder="Email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} />
         <label htmlFor="password">Password</label>
         <input className='registerInput' type="password" placeholder="Password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} />
         {errors.password && <div className="error">{errors.password}</div>}
         <label htmlFor="confirmPassword">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" id="confirmPassword" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+        <input className='registerInput' type="password" placeholder="Confirm Password" id="confirmPassword" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
         {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-        <Link to="/registerdetails">
         <button type="submit" className="registerButton">Register</button>
-        </Link>
       </form>
     </div>
   );
 }
+
+
