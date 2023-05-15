@@ -14,7 +14,7 @@ export const userColumns = [
 
   },
   {
-      field: 'rno',
+      field: 'rollNumber',
       headerName: 'Roll Number',
       width: 190,
 
