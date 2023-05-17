@@ -2,76 +2,71 @@
     border-radius: 10px;
     margin: 20px;
     padding: 10px;
-    -webkit-box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
-    -moz-box-shadow: -8px 10px 15px -5px rgba(0,0,0,0.24);
-
+    -webkit-box-shadow: -8px 10px 15px -5px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: -8px 10px 15px -5px rgba(0, 0, 0, 0.24);
+  
     .formInput {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        color: rgba(128, 128, 128, 0.708);
-        margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: rgba(128, 128, 128, 0.708);
+      margin: 20px;
     }
-        .plusIcon{
-            font-size: 300px;
-            cursor: pointer;
-    
-        }
-        h2{
-            text-align: center;
-            cursor: pointer;
-
-        }
-
-    .formlabel{
-            color:gray;
-            display: flex;
-            align-items: center;
-            gap:10px;
-            .icon{
-                cursor: pointer;
-
-            
-        }
-
+  
+    .plusIcon {
+      font-size: 300px;
+      cursor: pointer;
     }
+  
+    h2 {
+      text-align: center;
+      cursor: pointer;
+    }
+  
+    .formlabel {
+      color: gray;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  
+      .icon {
+        cursor: pointer;
+      }
+    }
+  
     .formInputInline {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+  
+      .formlabel {
+        color: gray;
         display: flex;
-        gap: 16px; /* Add spacing between the form inputs */
-        align-items: center; /* Align items vertically in the middle */
-        flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
-    
-        .formlabel {
-            color: gray;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            .icon {
-                cursor: pointer;
-            }
+        align-items: center;
+        gap: 10px;
+  
+        .icon {
+          cursor: pointer;
         }
-    
-        .inpbox {
-            padding: 5px;
-            border: none;
-            border-bottom: 1px solid gray;
-            justify-content: center;
-            text-align: center;
-            flex: 1; /* Allow input fields to take up available space */
-            max-width: 200px; /* Set a maximum width for the input fields */
-        }
+      }
+  
+      .inpbox {
+        padding: 5px;
+        border: none;
+        border-bottom: 1px solid gray;
+        justify-content: center;
+        text-align: center;
+        flex: 1;
+        max-width: 200px;
+      }
     }
-    
-        
-}
-
-
-.assignmentForm:hover {
-
+  }
+  
+  .assignmentForm:hover {
     box-shadow: -8px 10px 15px -5px #7451f8;
-    transition: box-shadow 0.3s ease-in-out; /* Add a transition effect to make the shadow appear smoothly */
-}
-
-
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  

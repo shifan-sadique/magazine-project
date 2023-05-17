@@ -6,13 +6,15 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import { db } from '../../../../firebase';
-import { collection, getDocs, onSnapshot, updateDoc,deleteDoc , doc } from "firebase/firestore";
+import { collection, getDocs,onSnapshot, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { auth } from '../../../../firebase'
 
 const Datatable = () => {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState('');
 
- useEffect(() => {
+
+  useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "user"), (snapshot) => {
       const fetchedData = [];
       snapshot.forEach((doc) => {
@@ -33,26 +35,66 @@ const Datatable = () => {
   const handleAccept = async (id) => {
     try {
       const userRef = doc(db, "user", id);
+  
+      // Update the document with the new status
       await updateDoc(userRef, { status: "active" });
-      console.log("Status updated successfully");
+  
+      // Listen for real-time changes to the document
+      const unsubscribe = onSnapshot(userRef, (doc) => {
+        if (doc.exists()) {
+          const updatedData = { id: doc.id, ...doc.data() };
+          // Update the data state with the updated document
+          setData((prevData) =>
+            prevData.map((item) => (item.id === updatedData.id ? updatedData : item))
+          );
+        }
+      });
+  
+      // Unsubscribe the snapshot listener when the component unmounts or the status is updated
+      return () => {
+        unsubscribe();
+      };
+  
     } catch (error) {
       console.log(error);
+    }
+  };
+  const handleReject = async (id) => {
+    try {
+      const userRef = doc(db, "user", id);
+  
+      // Delete the document from Firestore database
+      await deleteDoc(userRef);
+      console.log("User removed from Firestore database successfully");
+  
+      // Remove the user from Firebase Authentication
+      await auth().deleteUser(id);
+      console.log("User removed from authentication successfully");
+  
+      // Remove the deleted user from the local state
+      setData((prevData) => prevData.filter((item) => item.id !== id));
+  
+      console.log("User removed successfully");
+    } catch (error) {
+      console.log("Error removing user:", error);
     }
   };
 
   const handleRemove = async (id) => {
+    console.log("button click succesful");
     try {
-      // Remove user from authentication (Replace with your logic to remove from Firebase Authentication)
-      // ...
-
+      // Remove the user from Firebase Authentication
+      await auth.deleteUser(id);
+      console.log("User removed from authentication successfully");
+  
+      // Delete the document from Firestore database
       const userRef = doc(db, "user", id);
       await deleteDoc(userRef);
-      console.log("User removed successfully");
+      console.log("User removed from Firestore database successfully");
     } catch (error) {
-      console.log(error);
+      console.log("Error removing user:", error);
     }
   };
-
 
   const actionColumn = [
     {
@@ -61,15 +103,15 @@ const Datatable = () => {
       width: 200,
       renderCell: (params) => {
         const status = params.row.status;
-        const id = params.row.id;
+        const id = params.row.id; // Add this line to retrieve the ID
   
         if (status === "active") {
           return (
             <div className="cellAction">
               <div>
-                <Button variant="contained" size="small" color="secondary">
+                {/* <Button variant="contained" size="small" color="secondary">
                   Remove
-                </Button>
+                </Button> */}
               </div>
             </div>
           );
@@ -77,12 +119,12 @@ const Datatable = () => {
           return (
             <div className="cellAction">
               <div>
-                <Button variant="contained" size="small"style={{ backgroundColor: '#00ff10', color: '#ffffff' }} onClick={() => handleAccept(id)}>
+              <Button variant="contained" size="small"style={{ backgroundColor: '#00ff10', color: '#ffffff' }} onClick={() => handleAccept(id)}>
                   Accept
                 </Button>
               </div>
               <div>
-                <Button variant="contained" size="small" color="secondary" onClick={() => handleRemove(id)}>
+              <Button variant="contained" size="small" color="secondary" onClick={() => handleReject(id)}>
                   Reject
                 </Button>
               </div>
@@ -97,7 +139,7 @@ const Datatable = () => {
                 </Button>
               </div>
               <div>
-                <Button variant="contained" size="small" color="secondary" onClick={() => handleRemove(id)}>
+              <Button variant="contained" size="small" color="secondary" onClick={() => handleRemove(params.row.id)}>
                   Remove
                 </Button>
               </div>
@@ -137,7 +179,7 @@ const Datatable = () => {
         </div>
       </div>
 
-        <DataGrid
+      <DataGrid
           className="tableContent"
           rows={filteredRows}
           columns={userColumns.concat(actionColumn)}

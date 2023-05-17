@@ -12,6 +12,7 @@ const AdForm = () => {
   const [companyName, setCompanyName] = useState('');
   const [contactedBy, setContactedBy] = useState('');
   const [amount, setAmount] = useState('');
+  const [status, setStatus] = useState('pending');
   const [columnsBooked, setColumnsBooked] = useState('');
   const [managerName, setManagerName] = useState('');
   const [contactNo, setContactNo] = useState('');
@@ -32,26 +33,39 @@ const AdForm = () => {
     setPhoneError(!phonePattern.test(value));
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-    console.log("handleAdd function called"); // Add this line to log a message
-
+  
     const data = {
-      name: "tvm",
-      state: "kerala",
-      country: "india",
+      companyName,
+      contactedBy,
+      amount,
+      columnsBooked,
+      managerName,
+      contactNo,
+      email,
+      referredBy,
+      status,
       timeStamp: serverTimestamp()
     };
-
+  
     try {
       const res = await addDoc(collection(db, "advertisement"), data);
       console.log("Document written with ID: ", res.id);
+      // Reset the form fields
+      setCompanyName('');
+      setContactedBy('');
+      setAmount('');
+      setColumnsBooked('');
+      setManagerName('');
+      setContactNo('');
+      setEmail('');
+      setReferredBy('');
     } catch (error) {
       console.error("Error adding document: ", error);
-    }  }
-
+    }
+  };
+  
   return (
     <div className="afterClick">
       <form onSubmit={handleSubmit}>

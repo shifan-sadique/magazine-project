@@ -7,6 +7,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import { useEffect } from 'react';
 
 const Widget = ({type}) => {
     let data;
@@ -75,7 +76,18 @@ const Widget = ({type}) => {
         }
 
 
+        useEffect(()=>{
+            const fetchData = async ()=>{
+                const today= new Date();
+                const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1))
+                const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2))
 
+
+
+            
+            }
+            fetchData()
+        } )
   return (
     <div className='widget'>
         <div className="left">

@@ -17,9 +17,9 @@ const Assignment = () => {
             <div className="tableContainer">
               <AssignmentTable/>
             </div>
-            <div className="tableContainer">
+            {/* <div className="tableContainer">
               <AssignmentTable/>
-            </div>
+            </div> */}
         </div>
     </div>
   )
