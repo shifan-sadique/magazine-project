@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes ,getDownloadURL} from 'firebase/storage';
 import { db, storage } from '../../../../../firebase';
 
 const ArticleForm = () => {
@@ -29,16 +29,25 @@ const ArticleForm = () => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
   };
-
+  let downloadUrl=''
   const handleSubmit = async () => {
     try {
       setIsLoading(true); // Start loading state
 
       // Upload the file to Firebase Storage
       const storageRef = ref(storage, `article/${file.name}`);
-      await uploadBytes(storageRef, file);
+  
       // timestamp=serverTimestamp()
-
+     await uploadBytes(storageRef, file)
+      .then(snapshot => {
+        return getDownloadURL(snapshot.ref)
+      })
+      .then(downloadURL => {
+        downloadUrl=downloadURL
+        alert(downloadURL)
+        console.log('Download URL', downloadURL)
+      })
+  
 
       // Add the form data to the article collection in the database
       const articleData = {
@@ -46,7 +55,7 @@ const ArticleForm = () => {
         workBy,
         rollNo,
         category,
-        fileUrl: `article/${file.name}`, // Save the file URL in the document
+        fileUrl: downloadUrl, // Save the file URL in the document
         upVote,
         downVote,
         status,

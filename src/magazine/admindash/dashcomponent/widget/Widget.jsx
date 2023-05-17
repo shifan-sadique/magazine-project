@@ -1,113 +1,160 @@
-import './widget.scss'
+import './widget.scss';
+import { useEffect, useState } from 'react';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-// import PersonIcon from '@material-ui/icons/Person';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import FeedbackIcon from '@material-ui/icons/Feedback';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import { useEffect } from 'react';
-
-const Widget = ({type}) => {
-    let data;
+import { collection, getDocs,getCountFromServer, onSnapshot, updateDoc, doc, query, where } from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 
-    //temp
-    const amount=100;
-    const diff=20;
+const Widget = ({ type }) => {
+  const [amount, setAmount] = useState(0);
+  const [data, setData] = useState(null);
+  const diff = 20;
 
+  useEffect(() => {
 
-        switch(type){
-                case "articles":
-                    data={
-                        title:"Pending Articles",
-                        ISmONEY: false,
-                        link: "See all Pending Articles",
-                        icon:(<AssignmentIcon className='icon' style={{backgroundColor: "#1974d230", color:"navy"}}/> ),              
-                    };
-                    break;
-                    
-                case "feedback":
-                    data={
-                        title:"Feedback",
-                        ISmONEY: false,
-                        link: "View All Feedbacks",
-                        icon:<FeedbackIcon className='icon' style={{backgroundColor: "#fdcf7630", color:"#fdcf76"}}/>                   
-                    };
-                    break;
-                case "stats":
-                    data={
-                        title:"Article Statistics",
-                        ISmONEY: false,
-                        link: "View All Articles",
-                        icon:<EqualizerIcon className='icon' style={{backgroundColor: "#33004430", color:"#330044"}}/>                   
-                    };
-                    break;
-                    
-                case "advertisement":
-                    data={
-                        title:"Advertisement",
-                        ISmONEY: true,
-                        link: "See Ad Stats",
-                        icon:<MonetizationOnIcon className='icon'style={{backgroundColor: "#ffff0030", color:"gold"}}/>                   
-                    };
-                    break;
-                    
-                case "committee":
-                    data={
-                        title:"Volunteer Request",
-                        ISmONEY: false,
-                        link: "View All Requests",
-                        icon:<GroupAddIcon className='icon' style={{backgroundColor: "#990f0230", color:"#990f02"}}/>                   
-                    };
-                    break;
+    const fetchPendingArticlesCount = async () => {
+        const coll = collection(db, "article");
+        const q = query(coll, where("approve", "==", 0));
+        const snapshot = await getCountFromServer(q);
+        console.log('pending: ', snapshot.data().count);
+        return(snapshot.data().count);
+    }
 
-                case "name":
-                    data={
-                        title:"Name Suggestions",
-                        ISmONEY: false,
-                        link: "View All Names",
-                        icon:<HourglassEmptyIcon className='icon' style={{backgroundColor: "#00ff0030", color:"#00ff00"}}/>                   
-                    };
-                    break;                    
-                    default:
-                        break;
-        }
+    const fetchAllArticlesCount = async () => {
+        const coll = collection(db, "article");
+        const snapshot = await getCountFromServer(coll);
+        console.log('article: ', snapshot.data().count);
+        return(snapshot.data().count);
+    }
 
+    const fetchAcceptedAdvertisementsCount = async () => {
+        const coll = collection(db, "advertisement");
+        const q = query(coll, where("status", "==", "Accepted"));
+        const snapshot = await getCountFromServer(q);
+        console.log('ad: ', snapshot.data().count);
+        return(snapshot.data().count);
+    }
 
-        useEffect(()=>{
-            const fetchData = async ()=>{
-                const today= new Date();
-                const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1))
-                const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2))
+    const fetchActiveUsersCount = async () => {
+        const coll = collection(db, "user");
+        const q = query(coll, where("status", "==", "active"));
+        const snapshot = await getCountFromServer(q);
+        console.log('user: ', snapshot.data().count);
+        return(snapshot.data().count);
+    }
 
+    const fetchData = async () => {
+      switch (type) {
+        case 'articles':
+          // Fetch the count of pending articles from the database
+          // Replace 'fetchPendingArticlesCount' with the actual function to fetch the count
+          const pendingArticlesCount = await fetchPendingArticlesCount();
+          setAmount(pendingArticlesCount);
 
+          setData({
+            title: 'Pending Articles',
+            isMoney: false,
+            link: 'See all Pending Articles',
+            icon: (
+              <AssignmentIcon
+                className='icon'
+                style={{ backgroundColor: '#1974d230', color: 'navy' }}
+              />
+            ),
+          });
+          break;
 
-            
-            }
-            fetchData()
-        } )
+        case 'stats':
+          // Fetch the count of all articles from the database
+          // Replace 'fetchAllArticlesCount' with the actual function to fetch the count
+          const allArticlesCount = await fetchAllArticlesCount();
+          setAmount(allArticlesCount);
+
+          setData({
+            title: 'Article Statistics',
+            isMoney: false,
+            link: 'View All Articles',
+            icon: (
+              <EqualizerIcon
+                className='icon'
+                style={{ backgroundColor: '#33004430', color: '#330044' }}
+              />
+            ),
+          });
+          break;
+
+        case 'advertisement':
+          // Fetch the count of accepted advertisements from the database
+          // Replace 'fetchAcceptedAdvertisementsCount' with the actual function to fetch the count
+          const acceptedAdvertisementsCount = await fetchAcceptedAdvertisementsCount();
+          setAmount(acceptedAdvertisementsCount);
+
+          setData({
+            title: 'Advertisement',
+            isMoney: true,
+            link: 'See Ad Stats',
+            icon: (
+              <MonetizationOnIcon
+                className='icon'
+                style={{ backgroundColor: '#ffff0030', color: 'gold' }}
+              />
+            ),
+          });
+          break;
+
+        case 'committee':
+          // Fetch the count of active users from the database
+          // Replace 'fetchActiveUsersCount' with the actual function to fetch the count
+          const activeUsersCount = await fetchActiveUsersCount();
+          setAmount(activeUsersCount);
+
+          setData({
+            title: 'Committee Request',
+            isMoney: false,
+            link: 'View All Requests',
+            icon: (
+              <GroupAddIcon
+                className='icon'
+                style={{ backgroundColor: '#990f0230', color: '#990f02' }}
+              />
+            ),
+          });
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    fetchData();
+  }, [type]);
+
   return (
     <div className='widget'>
-        <div className="left">
-            <span className="title">{data.title}</span>
-            <span className="counter">
-                {data.isMoney && "$"} {amount}
+      {data && (
+        <>
+          <div className='left'>
+            <span className='title'>{data.title}</span>
+            <span className='counter'>
+              {data.isMoney} {amount}
             </span>
-            <span className="link">{data.link}</span>
-        </div>
-        <div className="right">
-            <div className="percentage positive">
-                <KeyboardArrowUpIcon/>
-                {diff}
+            <span className='link'>{data.link}</span>
+          </div>
+          <div className='right'>
+            <div className='percentage positive'>
+              <KeyboardArrowUpIcon />
+              {diff}
             </div>
-        <div className="icon">
-            {data.icon}
-        </div>
-        </div>
+            <div className='icon'>{data.icon}</div>
+          </div>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Widget
+export default Widget;
