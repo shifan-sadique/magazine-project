@@ -9,9 +9,6 @@ import { auth }from '../../../firebase'
 import { AuthContext } from "../../../context/AuthContext";
 
 
-
-
-
 export default function Login(props) {
 
   const [error,setError]= useState(false)
@@ -29,7 +26,7 @@ export default function Login(props) {
         // Signed in 
         const user = userCredential.user;
         dispatch({type:"LOGIN",payload:user})
-        navigate("/admin/dashboard");
+        navigate("/committee/dashboard");
       })
       .catch((error) => {
         setError(true);

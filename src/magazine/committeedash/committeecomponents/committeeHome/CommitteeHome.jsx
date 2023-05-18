@@ -5,61 +5,81 @@ import CommitteeFeatured from '../committeeFeatured/CommitteeFeatured'
 import CommitteeTable from '../CommitteeTable/CommitteeTable'
 import { Button } from "@material-ui/core"
 import { Link } from 'react-router-dom';
-
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../../context/AuthContext';
+import { collection, doc, getDoc } from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 function CommitteeHome() {
+  const { currentUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (currentUser) {
+        const userDoc = doc(db, 'user', currentUser.uid);
+        const userSnapshot = await getDoc(userDoc);
+        if (userSnapshot.exists()) {
+          const userData = userSnapshot.data();
+          setUserData(userData);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [currentUser]);
+
   return (
     <div className="commhome">
       <CommitteeSidebar/>
       <div className="commhomeContainer">
-      <CommitteeNav/>
+        <CommitteeNav/>
         <div className="top">
           <div className="left">
             <div className="editButton">
-            <Button>
-              <Link to="/admin/magazinecommittee/edit">
-              edit
-              </Link>
-            </Button>
+              <Button>
+                <Link to="/admin/magazinecommittee/edit">
+                  edit
+                </Link>
+              </Button>
             </div>
             <h1 className="title">User Information</h1>
-            <div className="item">
-              <div className="details">
-                <h1 className="itemTitle">
-                  Nelwin George
-                </h1>
-                <img className="itemImg" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-                <div className="detailitem">
-                  <span className="itemKey">Batch:</span>
-                  <span className="itemValue">21-23</span>
-                </div>
-                <div className="detailitem">
-                  <span className="itemKey">Specialization:</span>
-                  <span className="itemValue">Proof Read</span>
-                </div>
-                <div className="detailitem">
-                  <span className="itemKey">Email:</span>
-                  <span className="itemValue">nellu@gmail.com</span>
-                </div>
-
-                <div className="detailitem">
-                  <span className="itemKey">Phone:</span>
-                  <span className="itemValue">9876543210</span>
+            {userData && (
+              <div className="item">
+                <div className="details">
+                  <h1 className="itemTitle">{userData.name}</h1>
+                  <img className="itemImg" src={userData.profilePhotoUrl} alt="" />
+                  <div className="detailitem">
+                    <span className="itemKey">Batch:</span>
+                    <span className="itemValue">{userData.batch}</span>
+                  </div>
+                  <div className="detailitem">
+                    <span className="itemKey">Specialization:</span>
+                    <span className="itemValue">{userData.specialization}</span>
+                  </div>
+                  <div className="detailitem">
+                    <span className="itemKey">Email:</span>
+                    <span className="itemValue">{userData.email}</span>
+                  </div>
+                  <div className="detailitem">
+                    <span className="itemKey">Phone:</span>
+                    <span className="itemValue">{userData.phoneNumber}</span>
+                  </div>
                 </div>
               </div>
-
-            </div>
+            )}
           </div>
           <div className="right">
-              <CommitteeFeatured />
+            <CommitteeFeatured />
           </div>
         </div>
         <div className="userBottom">
-        <h1 className="title">Work List</h1>
+          <h1 className="title">Work List</h1>
           <CommitteeTable/>
         </div>
       </div>
-      </div>
+    </div>
   )
 }
-export default CommitteeHome
+
+export default CommitteeHome;

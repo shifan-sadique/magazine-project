@@ -13,9 +13,9 @@ const CommitteeArticlesHome = () => {
               <h1 className='title'>ARTICLES</h1>
                 <CommitteeArticlesForm/>
             </div>
-            <div className="articleTable">
+            {/* <div className="articleTable">
               <CommitteeArticlesTable/>
-            </div>
+            </div> */}
         </div>
     </div>
   )

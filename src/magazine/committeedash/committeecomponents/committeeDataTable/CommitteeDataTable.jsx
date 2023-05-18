@@ -1,71 +1,54 @@
 import './committeeDataTable.scss'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import { userColumns, userRows } from '../../../../datatablesource';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { db } from '../../../../firebase';
 
 const CommitteeDatatable = () => {
-
   const [searchText, setSearchText] = useState('');
+  const [userRows, setUserRows] = useState([]);
 
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'user'), (snapshot) => {
+      const fetchedData = [];
+      snapshot.forEach((doc) => {
+        const { name, rollNumber, batch, email, phoneNumber, specialization } = doc.data();
+        fetchedData.push({
+          id: doc.id,
+          name,
+          rollNumber,
+          batch,
+          email,
+          phoneNumber,
+          specialization,
+        });
+      });
+      setUserRows(fetchedData);
+    });
+
+    return () => {
+      unsubscribe(); // Unsubscribe the snapshot listener when the component unmounts
+    };
+  }, []);
+
   const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        const status = params.row.status;
-  
-        if (status === "Active") {
-          return (
-            <div className="cellAction">
-              <div>
-                <Button variant="contained" size="small" color="secondary">
-                  Remove
-                </Button>
-              </div>
-            </div>
-          );
-        } else if (status === "Pending") {
-          return (
-            <div className="cellAction">
-              <div>
-                <Button variant="contained" size="small"style={{ backgroundColor: '#00ff10', color: '#ffffff' }}>
-                  Accept
-                </Button>
-              </div>
-              <div>
-                <Button variant="contained" size="small" color="secondary">
-                  Reject
-                </Button>
-              </div>
-            </div>
-          );
-        } else if (status === "Passive") {
-          return (
-            <div className="cellAction">
-              <div>
-                <Button variant="contained" size="small" color="primary">
-                  Remind
-                </Button>
-              </div>
-              <div>
-                <Button variant="contained" size="small" color="secondary">
-                  Remove
-                </Button>
-              </div>
-            </div>
-          );
-        } else {
-          return <div></div>;
-        }
-      },
-    },
+    // Action column definition
+  ];
+
+  const columns = [
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'rollNumber', headerName: 'Roll Number', width: 150 },
+    { field: 'batch', headerName: 'Batch', width: 150 },
+    { field: 'email', headerName: 'Email', width: 200 },
+    { field: 'phoneNumber', headerName: 'Phone Number', width: 150 },
+    { field: 'specialization', headerName: 'Specialization', width: 200 },
+    ...actionColumn, // Include the action column
   ];
 
   const filteredRows = userRows.filter((row) =>
@@ -96,7 +79,7 @@ const CommitteeDatatable = () => {
         <DataGrid
           className="tableContent"
           rows={filteredRows}
-          columns={userColumns.concat(actionColumn)}
+          columns={columns}
           pageSize={5}
           checkboxSelection
           disableSelectionOnClick
