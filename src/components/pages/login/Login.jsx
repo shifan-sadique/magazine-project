@@ -26,7 +26,7 @@ export default function Login(props) {
         // Signed in 
         const user = userCredential.user;
         dispatch({type:"LOGIN",payload:user})
-        navigate("/committee/dashboard");
+        navigate("/admin/dashboard");
       })
       .catch((error) => {
         setError(true);

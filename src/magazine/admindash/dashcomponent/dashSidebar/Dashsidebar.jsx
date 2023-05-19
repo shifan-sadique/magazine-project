@@ -57,7 +57,7 @@ function Dashsidebar() {
 
                 </li>
                 
-                <li>
+                {/* <li>
                 <Link to="/admin/dashboard">
 
                     <span>
@@ -66,7 +66,7 @@ function Dashsidebar() {
                     </span>
                     </Link>
 
-                </li>
+                </li> */}
                 <p className="title">USEFUL</p>
 
                 <li>
@@ -163,11 +163,11 @@ function Dashsidebar() {
                 </li>
             </ul>
         </div>
-        <div className="bottom">
+        {/* <div className="bottom">
             <div className="colorOption"></div>
             <div className="colorOption"></div>
 
-        </div>
+        </div> */}
     </div>
   )
 }
