@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './committeeArticlesForm.scss';
+import './magazineIssueForm.scss';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -11,19 +11,18 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { GrammarlyEditorPlugin } from '@grammarly/editor-sdk-react'
 import { Link } from 'react-router-dom';
 
-const CommitteeArticlesForm = () => {
+
+
+
+const MagazineIssueForm = () => {
   const [showAfterClick, setShowAfterClick] = useState(false);
-  const [title, setTitle] = useState('');
-  const [workBy, setWorkBy] = useState('');
-  const [rollNo, setRollNo] = useState('');
-  const [category, setCategory] = useState('');
-  const [content, setContent] = useState('');
-  const [file, setFile] = useState(null);
-  const [upVote, setUpvote]= useState(0);
-  const [downVote, setDownvote] = useState(0);
-  const [status, setStatus] = useState('pending');
-  const [approve, setApprove] = useState(0);
+  const [magazineName, setMagazineName] = useState('');
+  const [batch, setBatch] = useState('');
+  const [year, setYear] = useState('');
+  const [magazineEditor, setMagazineEditor] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState(null);
+
 
   const handleClick = () => {
     setShowAfterClick(true);
@@ -31,9 +30,8 @@ const CommitteeArticlesForm = () => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    const allowedTypes = ['image/jpeg', 'image/png'];
 
-    if (selectedFile && allowedTypes.includes(selectedFile.type)) {
+    if (selectedFile) {
       setFile(selectedFile);
     } else {
       setFile(null);
@@ -50,7 +48,7 @@ const CommitteeArticlesForm = () => {
   
       // If a file is selected, upload it to Firebase Storage
       if (file) {
-        const storageRef = ref(storage, `article/${file.name}`);
+        const storageRef = ref(storage, `magazine/${file.name}`);
   
         await uploadBytes(storageRef, file)
           .then((snapshot) => {
@@ -64,28 +62,23 @@ const CommitteeArticlesForm = () => {
   
       // Add the form data to the article collection in the database
       const articleData = {
-        title,
-        workBy,
-        rollNo,
-        category,
-        content,
+        
         fileUrl: downloadUrl, // Save the file URL in the document
-        upVote,
-        downVote,
-        status,
-        approve,
+        magazineName,
+        batch,
+        year,
+        magazineEditor,
         timestamp: serverTimestamp(), // Add the timestamp field with the current server timestamp
       };
   
-      await addDoc(collection(db, 'article'), articleData);
+      await addDoc(collection(db, 'magazines'), articleData);
   
       // Reset the form and state
       setShowAfterClick(false);
-      setTitle('');
-      setWorkBy('');
-      setRollNo('');
-      setCategory('');
-      setContent('');
+      setMagazineName('');
+      setBatch('');
+      setYear('');
+      setMagazineEditor('');
       setFile(null);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -111,63 +104,52 @@ const CommitteeArticlesForm = () => {
             <Box
               component="form"
               sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
+                '& > :not(style)': { m: 1, width: '23ch' },
               }}
               noValidate
               autoComplete="off"
             >
               <TextField
-                style={{ margin: '20px' }}
+                style={{ margin: '17px' }}
                 id="standard-basic"
-                label="Title"
+                label="Magazine Name"
                 variant="standard"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <TextField
-                style={{ margin: '20px' }}
+                value={magazineName}
+                onChange={(e) => setMagazineName(e.target.value)}
+                />
+
+                <TextField
+                style={{ margin: '17px' }}
                 id="standard-basic"
-                label="Work By"
+                label="Batch"
                 variant="standard"
-                value={workBy}
-                onChange={(e) => setWorkBy(e.target.value)}
-              />
-              <TextField
-                style={{ margin: '20px' }}
+                value={batch}
+                onChange={(e) => setBatch(e.target.value)}
+                />
+
+                <TextField
+                style={{ margin: '17px' }}
                 id="standard-basic"
-                label="Roll No"
+                label="Year"
                 variant="standard"
-                value={rollNo}
-                onChange={(e) => setRollNo(e.target.value)}
-              />
-              <TextField
-                style={{ margin: '20px' }}
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                />
+
+                <TextField
+                style={{ margin: '17px' }}
                 id="standard-basic"
-                label="Category"
+                label="Magazine Editor"
                 variant="standard"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-              <GrammarlyEditorPlugin clientId="client_CBEG5mGBFrSdMoeEa6qHtA">  
-                  <TextareaAutosize
-                    style={{ margin: '20px', width:"80%" }}
-                    aria-label="Article Content"
-                    minRows={3}
-                    placeholder="Enter your content..."
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                  />
-                </GrammarlyEditorPlugin>
+                value={magazineEditor}
+                onChange={(e) => setMagazineEditor(e.target.value)}
+                />
             </Box>
-            <p>
-                  <Link to="https://kuttipencil.in/google/" target="_blank" rel="noopener noreferrer">
-                    Do you want assistance to type in Malayalam?
-                  </Link>
-                </p>
+            
           </div>
           <div className="formInput">
             <Button variant="contained" component="label">
-              {file ? 'File Selected' : 'Upload JPEG/PNG'}
+              {file ? 'File Selected' : 'Upload'}
               <input hidden accept="image/jpeg, image/png" type="file" onChange={handleFileChange} />
             </Button>
           </div>
@@ -186,4 +168,5 @@ const CommitteeArticlesForm = () => {
     </div>
   );
 };
-export default CommitteeArticlesForm;
+
+export default MagazineIssueForm;

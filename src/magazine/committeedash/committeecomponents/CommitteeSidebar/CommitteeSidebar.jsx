@@ -103,11 +103,11 @@ function Committeesidebar() {
                 </li>
             </ul>
         </div>
-        <div className="bottom">
+        {/* <div className="bottom">
             <div className="colorOption"></div>
             <div className="colorOption"></div>
 
-        </div>
+        </div> */}
     </div>
   )
 }

@@ -20,6 +20,7 @@ const ArticleForm = () => {
   const [workBy, setWorkBy] = useState('');
   const [rollNo, setRollNo] = useState('');
   const [category, setCategory] = useState('');
+  const [email, setEmail] = useState('');
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
   const [upVote, setUpvote]= useState(0);
@@ -71,6 +72,7 @@ const ArticleForm = () => {
         workBy,
         rollNo,
         category,
+        email,
         content,
         fileUrl: downloadUrl, // Save the file URL in the document
         upVote,
@@ -114,13 +116,13 @@ const ArticleForm = () => {
             <Box
               component="form"
               sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
+                '& > :not(style)': { m: 1, width: '23ch' },
               }}
               noValidate
               autoComplete="off"
             >
               <TextField
-                style={{ margin: '20px' }}
+                style={{ margin: '17px' }}
                 id="standard-basic"
                 label="Title"
                 variant="standard"
@@ -128,7 +130,7 @@ const ArticleForm = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
               <TextField
-                style={{ margin: '20px' }}
+                style={{ margin: '17px' }}
                 id="standard-basic"
                 label="Work By"
                 variant="standard"
@@ -136,7 +138,7 @@ const ArticleForm = () => {
                 onChange={(e) => setWorkBy(e.target.value)}
               />
               <TextField
-                style={{ margin: '20px' }}
+                style={{ margin: '17px' }}
                 id="standard-basic"
                 label="Roll No"
                 variant="standard"
@@ -144,16 +146,24 @@ const ArticleForm = () => {
                 onChange={(e) => setRollNo(e.target.value)}
               />
               <TextField
-                style={{ margin: '20px' }}
+                style={{ margin: '17px' }}
                 id="standard-basic"
                 label="Category"
                 variant="standard"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               />
+              <TextField
+                style={{ margin: '17px' }}
+                id="standard-basic"
+                label="Email"
+                variant="standard"
+                value={email}
+                onChange={(e) => setCategory(e.target.value)}
+              />
               <GrammarlyEditorPlugin clientId="client_CBEG5mGBFrSdMoeEa6qHtA">  
                   <TextareaAutosize
-                    style={{ margin: '20px', width:"80%" }}
+                    style={{ margin: '20px', width:"90%" }}
                     aria-label="Article Content"
                     minRows={3}
                     placeholder="Enter your content..."
@@ -162,11 +172,7 @@ const ArticleForm = () => {
                   />
                 </GrammarlyEditorPlugin>
             </Box>
-            <p>
-                  <Link to="https://kuttipencil.in/google/" target="_blank" rel="noopener noreferrer">
-                    Do you want assistance to type in Malayalam?
-                  </Link>
-                </p>
+            
           </div>
           <div className="formInput">
             <Button variant="contained" component="label">

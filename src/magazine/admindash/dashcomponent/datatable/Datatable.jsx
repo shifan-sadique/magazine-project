@@ -8,10 +8,13 @@ import AddIcon from '@mui/icons-material/Add';
 import { db } from '../../../../firebase';
 import { collection, getDocs,onSnapshot, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { auth } from '../../../../firebase'
+import { Link } from 'react-router-dom';
+
 
 const Datatable = () => {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState('');
+  
 
 
   useEffect(() => {

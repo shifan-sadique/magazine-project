@@ -16,6 +16,8 @@ import Assignment from "./magazine/admindash/dashcomponent/assignment/assignment
 import Review from "./magazine/admindash/dashcomponent/review/Review.jsx"
 import Article from "./magazine/admindash/dashcomponent/article/articlehome/ArticleHome.jsx"
 import Advertisement from "./magazine/admindash/dashcomponent/advertisement/adHome/AdHome.jsx"
+import MagazineIssue from "./magazine/admindash/dashcomponent/magazineIssue/magazineIssueHome/MagazineIssueHome.jsx"
+import MagazineDisplay from "./components/pages/magazineDisplay/MagazineDisplay.jsx";
 
 
 // magazine committee imports
@@ -66,6 +68,10 @@ function App() {
         {/* Login */}
         <Route path="/login" element={<Login/>}> </Route>
 
+        {/* Magazine Display */}
+        <Route path="/magazinedisplay" element={<MagazineDisplay/>}> </Route>
+
+
         <Route path="/dashboard" element={<RequireAuth><Dashboard/></RequireAuth>} />
           {/* Admin Dashboard */}
           <Route path="/admin/dashboard" element={<RequireAuth><Dashboard/></RequireAuth>} />
@@ -88,7 +94,7 @@ function App() {
           <Route path="/admin/articles" element={<RequireAuth><Article/></RequireAuth>} />
 
           {/* Magazine Issue */}
-          <Route path="/admin/magazineissue" element={<RequireAuth><Dashboard/></RequireAuth>} />
+          <Route path="/admin/magazineissue" element={<RequireAuth><MagazineIssue/></RequireAuth>} />
 
           {/* Advertisement Section */}
           <Route path="/admin/advertisement" element={<RequireAuth><Advertisement/></RequireAuth>} />

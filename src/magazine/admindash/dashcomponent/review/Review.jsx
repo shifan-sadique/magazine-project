@@ -46,6 +46,7 @@ const Review = () => {
           title: data.title,
           artist: data.workBy,
           category: data.category,
+          email: data.email,
           upcount: data.upVote,
           downcount: data.downVote,
           approve: data.approve,
