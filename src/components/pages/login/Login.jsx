@@ -82,6 +82,10 @@ export default function Login(props) {
         <Link to="/register">
           <button className="loginRegisterButton">Register</button>
         </Link>
+        <br />
+        <Link to="/" className="custom-link">
+          <p>Go to Home</p>
+        </Link>
         {error && <span className="invalid">Invalid Credentials</span>}
       </form>
     </div>

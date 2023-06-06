@@ -150,7 +150,7 @@ const MagazineIssueForm = () => {
           <div className="formInput">
             <Button variant="contained" component="label">
               {file ? 'File Selected' : 'Upload'}
-              <input hidden accept="image/jpeg, image/png" type="file" onChange={handleFileChange} />
+              <input hidden type="file" onChange={handleFileChange} />
             </Button>
           </div>
           <div className="formInput">

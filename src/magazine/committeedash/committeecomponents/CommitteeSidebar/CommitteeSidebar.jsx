@@ -68,7 +68,7 @@ function Committeesidebar() {
                     </span>
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                 <Link to="/committee/magazineissue">
 
                     <span>
@@ -77,7 +77,7 @@ function Committeesidebar() {
                     </span>
                     </Link>
 
-                </li>
+                </li> */}
                 <li>
                 <Link to="/committee/advertisement">
 

@@ -38,14 +38,14 @@ function Dashsidebar() {
                 </li >
                 <p className="title">PEOPLE</p>
 
-                <li>
+                {/* <li>
                     <Link to="/admin/user">
                     <span>
                         <PeopleAltIcon className="icons"/>
                         Users
                     </span>
                     </Link>
-                </li>
+                </li> */}
                 
                 <li>
                 <Link to="/admin/magazinecommittee">
@@ -119,7 +119,7 @@ function Dashsidebar() {
                     </Link>
 
                 </li>
-                <li>
+                {/* <li>
                 <Link to="/admin/dashboard">
 
                     <span>
@@ -139,9 +139,9 @@ function Dashsidebar() {
                     </span>
                     </Link>
 
-                </li>
+                </li> */}
                 <p className="title">USER</p>
-                <li>
+                {/* <li>
                 <Link to="/admin/dashboard">
 
                     <span>
@@ -150,7 +150,7 @@ function Dashsidebar() {
                     </span>
                     </Link>
 
-                </li>
+                </li> */}
                 <li>
                 <Link to="/login">
 

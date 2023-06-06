@@ -145,10 +145,10 @@ const Widget = ({ type }) => {
             <span className='link'>{data.link}</span>
           </div>
           <div className='right'>
-            <div className='percentage positive'>
+            {/* <div className='percentage positive'>
               <KeyboardArrowUpIcon />
               {diff}
-            </div>
+            </div> */}
             <div className='icon'>{data.icon}</div>
           </div>
         </>

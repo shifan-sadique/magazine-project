@@ -13,7 +13,7 @@
         <div className="wrapper">
             <div className="search">
                 <input type="text" placeholder="Search..." />
-                <SearchIcon/>
+                {/* <SearchIcon/> */}
             </div>
             <div className="items">
                 <div className="item">
@@ -21,22 +21,22 @@
                     English
                 </div>
                 <div className="item">
-                    <Brightness4Icon className="icon"/>
+                    {/* <Brightness4Icon className="icon"/> */}
                 </div>
                 <div className="item">
                     <FullscreenIcon/>
                 </div>
                 <div className="item">
-                    <NotificationsIcon className="icon"/>
-                    <div className="counter">2</div>
+                    {/* <NotificationsIcon className="icon"/> */}
+                    {/* <div className="counter">2</div> */}
                 </div>
                 <div className="item">
-                    <ChatBubbleIcon className="icon"/>
-                    <div className="counter">1</div>
+                    {/* <ChatBubbleIcon className="icon"/> */}
+                    {/* <div className="counter">1</div> */}
 
                 </div>
                 <div className="item">
-                    <ListOutlinedIcon className="icon"/>
+                    {/* <ListOutlinedIcon className="icon"/> */}
                 </div>
             </div>
         </div>

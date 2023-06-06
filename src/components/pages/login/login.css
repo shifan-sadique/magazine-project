@@ -18,6 +18,10 @@
     opacity: 0.8;
   }
   
+  .custom-link{
+    color: inherit;
+  margin-left: 45px;
+  }
   
 
 .loginForm{

@@ -57,7 +57,7 @@ function App() {
       <Routes>
         {/* Blog Page */}
 
-        <Route path="/home" element={<Home/>}> </Route>
+        <Route path="/" element={<Home/>}> </Route>
         <Route path="/magazine" element={<Magazine/>}> </Route>
         <Route path="/post/:postId" element={<Single/>}> </Route>
         <Route path="/write" element={<Write/>}> </Route>

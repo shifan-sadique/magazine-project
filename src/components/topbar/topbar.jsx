@@ -16,8 +16,7 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { useNavigate } from 'react-router-dom';
 
-
-const pages = ['Magazines', 'Contribute', 'Blog'];
+const pages = ['Magazines', 'Contribute'];
 const settings = ['Register', 'Login'];
 
 function ResponsiveAppBar() {
@@ -26,10 +25,10 @@ function ResponsiveAppBar() {
   const [navBackground, setNavBackground] = React.useState('transparent');
   const navigate = useNavigate(); // Initialize useNavigate
 
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -41,10 +40,15 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  
+
   const handleContributeClick = () => {
     // Navigate to "/write"
     navigate('/write');
+  };
+
+  const handleMagazinesClick = () => {
+    // Navigate to "/magazinedisplay"
+    navigate('/magazinedisplay');
   };
 
   const handleScroll = () => {
@@ -72,12 +76,11 @@ function ResponsiveAppBar() {
     navigate('/register');
   };
 
-
   return (
     <AppBar position="fixed" style={{ backgroundColor: 'lightskyblue' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ImportContactsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+          <ImportContactsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -152,16 +155,22 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
-            <Button
-              key={page}
-              onClick={page === 'Contribute' ? handleContributeClick : handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              {page}
-            </Button>
-          ))}
-        </Box>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={
+                  page === 'Contribute'
+                    ? handleContributeClick
+                    : page === 'Magazines'
+                    ? handleMagazinesClick
+                    : handleCloseNavMenu
+                }
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -199,7 +208,11 @@ function ResponsiveAppBar() {
                 <MenuItem
                   key={setting}
                   onClick={
-                    setting === 'Login' ? handleLoginClick : handleRegisterClick
+                    setting === 'Login'
+                      ? handleLoginClick
+                      : setting === 'Register'
+                      ? handleRegisterClick
+                      : handleCloseUserMenu
                   }
                 >
                   <Typography textAlign="center">{setting}</Typography>

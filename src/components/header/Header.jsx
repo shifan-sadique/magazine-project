@@ -76,7 +76,7 @@ function LandingPage() {
         Join Our Committee
       </button>
       
-      <footer className="footer">&copy; 2023 Our College Magazine. All rights reserved.</footer>
+      <footer className="footer">&copy; 2023 ASCA. All rights reserved.</footer>
     </div>
   );
 }

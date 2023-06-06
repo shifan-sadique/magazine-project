@@ -18,25 +18,25 @@ const Featured = () => {
               <CircularProgressbar value={70} text={'70%'} strokeWidth={5}/>
           </div>
           <p className='title'>Work Progress</p>
-          <p className='totalnum'>80</p>
+          <p className='totalnum'>13</p>
           <p className='desc'>Total Articles Recieved</p>
           <div className="summary">
             <div className="item">
               <div className="itemTitle">Deadline Nearby</div>
               <div className="itemResult">
-                <div className="resultAmount">10</div>
+                <div className="resultAmount">3</div>
               </div>
             </div>
             <div className="item">
               <div className="itemTitle">Work Pending</div>
               <div className="itemResult">
-                <div className="resultAmount">20</div>
+                <div className="resultAmount">9</div>
               </div>
             </div>
             <div className="item">
               <div className="itemTitle">Upcoming Events</div>
               <div className="itemResult">
-                <div className="resultAmount">7</div>
+                <div className="resultAmount">1</div>
               </div>
             </div>
           </div>
